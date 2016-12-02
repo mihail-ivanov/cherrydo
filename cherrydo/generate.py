@@ -1,7 +1,7 @@
 
 
-from args import get_arg, get_arg_list
-from helpers import is_cherrydo_project, cherrydo_project_name
+from cherrydo.args import get_arg, get_arg_list
+from cherrydo.helpers import is_cherrydo_project, cherrydo_project_name
 
 
 def _generate_controller(controller_name, params):

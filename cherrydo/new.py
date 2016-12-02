@@ -1,9 +1,9 @@
 
 import os
 
-from args import get_arg
-from configuration import MANDATORY_DIRECTORIES, OPTIONAL_DIRECTORIES
-from helpers import is_cherrydo_project, path_exists, create_dir, change_dir
+from cherrydo.args import get_arg
+from cherrydo.configuration import MANDATORY_DIRECTORIES, OPTIONAL_DIRECTORIES
+from cherrydo.helpers import is_cherrydo_project, path_exists, create_dir, change_dir
 
 
 def _new_project(project_name):

@@ -1,10 +1,10 @@
 
 import sys
 
-from args import get_arg
-from db import check_db
-from generate import check_generate
-from new import check_new
+from cherrydo.args import get_arg
+from cherrydo.db import check_db
+from cherrydo.generate import check_generate
+from cherrydo.new import check_new
 
 
 def print_help():

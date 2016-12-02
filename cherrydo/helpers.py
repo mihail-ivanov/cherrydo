@@ -1,7 +1,7 @@
 
 import os
 
-from configuration import MANDATORY_DIRECTORIES
+from cherrydo.configuration import MANDATORY_DIRECTORIES
 
 
 def get_current_path(path):

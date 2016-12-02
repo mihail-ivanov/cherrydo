@@ -1,5 +1,5 @@
 
-from args import get_arg
+from cherrydo.args import get_arg
 
 
 def _db_migrate():
