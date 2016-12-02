@@ -13,6 +13,15 @@ def get_current_path(path):
         return os.path.join(current_dir, *path)
 
 
+def get_cherrydo_lib_path(path):
+    dir_path = os.path.dirname(os.path.abspath(__file__))
+
+    if isinstance(path, str):
+        return os.path.join(dir_path, path)
+    else:
+        return os.path.join(dir_path, *path)
+
+
 def is_cherrydo_project():
     for dir_path in MANDATORY_DIRECTORIES:
         if not os.path.isdir(get_current_path(dir_path)):
@@ -36,3 +45,16 @@ def path_exists(path):
 
 def create_dir(path):
     os.makedirs(get_current_path(path))
+
+
+def read_template(template_name):
+    file_path = get_cherrydo_lib_path(['templates', template_name])
+    data = None
+    with open(file_path, 'r') as tfile:
+        data = tfile.read()
+    return data
+
+
+def template_to_filename(template_name):
+    return template_name.replace('.pystr', '')
+
