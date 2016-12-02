@@ -8,7 +8,7 @@ setup(
     url='https://github.com/mihail-ivanov/cherrydo',
 
     author='Mihail Ivanov',
-    author='mihail@muplextech.com',
+    author_email='mihail@muplextech.com',
 
     license='MIT',
 
