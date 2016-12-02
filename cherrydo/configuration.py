@@ -1,24 +1,22 @@
 
 MANDATORY_DIRECTORIES = [
-    ['controllers',],
-    ['models',],
-    ['views',],
+    'controllers',
+    'models',
+    'views',
 ]
 
 
 OPTIONAL_DIRECTORIES = [
-    ['static'],
-    ['static', 'css'],
-    ['static', 'js'],
-    ['static', 'images'],
+    'static',
+    'static/css',
+    'static/js',
+    'static/images',
 ]
 
 
 NEW_CREATE_FILES = [
-    # Controllers
-    {'template': 'app_controller.py.pystr', 'dest_dir': ['controllers']},
-    # Static files
-    {'template': 'application.css.pystr', 'dest_dir': ['static', 'css']},
-    # Views
-    {'template': 'base.html.pystr', 'dest_dir': ['views']},
+    # Format: ('template name', 'destination')
+    ('app_controller.py.pystr', 'controllers/app_controller.py'),
+    ('application.css.pystr', 'static/css/application.css'),
+    ('base.html.pystr', 'views/base.html'),
 ]
