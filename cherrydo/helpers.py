@@ -45,3 +45,22 @@ def read_template(template_name):
     with open(file_path, 'r') as tfile:
         data = tfile.read()
     return data
+
+
+def template_to_file(template_name, destination, context):
+    template = read_template(template_name)
+    destination_path = get_current_path(destination)
+    # Ensure directory
+    create_dir(os.path.dirname(destination_path))
+
+    with open(destination_path, 'w') as dfile:
+        dfile.write(template.format(**context))
+
+
+def append_template_to_file(template_name, destination, context):
+    template = read_template(template_name)
+    destination_path = get_current_path(destination)
+
+    with open(destination_path, 'a') as dfile:
+        dfile.write(template.format(**context))
+

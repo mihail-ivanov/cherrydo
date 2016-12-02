@@ -1,6 +1,10 @@
 include cherrydo/templates/_controller.py.pystr
+include cherrydo/templates/_css.css.pystr
+include cherrydo/templates/_js.js.pystr
 include cherrydo/templates/_model.py.pystr
 include cherrydo/templates/_view.html.pystr
 include cherrydo/templates/app_controller.py.pystr
+include cherrydo/templates/app_model.py.pystr
 include cherrydo/templates/application.css.pystr
+include cherrydo/templates/application.js.pystr
 include cherrydo/templates/base.html.pystr

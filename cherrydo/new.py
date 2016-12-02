@@ -11,14 +11,7 @@ from cherrydo.helpers import get_current_path
 from cherrydo.helpers import is_cherrydo_project
 from cherrydo.helpers import path_exists
 from cherrydo.helpers import read_template
-
-
-def _create_file_from_template(template_name, destination, context):
-    template = read_template(template_name)
-    destination_path = get_current_path(destination)
-
-    with open(destination_path, 'w') as dfile:
-        dfile.write(template.format(**context))
+from cherrydo.helpers import template_to_file
 
 
 def _new_project(project_name):
@@ -39,8 +32,12 @@ def _new_project(project_name):
         create_dir(dir_name)
 
     context = {'project_name': project_name}
-    for template_name, destination in NEW_CREATE_FILES:
-        _create_file_from_template(template_name, destination, context)
+    for file_info in NEW_CREATE_FILES:
+        template_to_file(
+            file_info['template_name'],
+            file_info['destination'],
+            context
+        )
 
     return True
 

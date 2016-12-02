@@ -15,8 +15,55 @@ OPTIONAL_DIRECTORIES = [
 
 
 NEW_CREATE_FILES = [
-    # Format: ('template name', 'destination')
-    ('app_controller.py.pystr', 'controllers/app_controller.py'),
-    ('application.css.pystr', 'static/css/application.css'),
-    ('base.html.pystr', 'views/base.html'),
+    {
+        'template_name': 'app_controller.py.pystr',
+        'destination': 'controllers/app_controller.py',
+    },
+
+    {
+        'template_name': 'app_model.py.pystr',
+        'destination': 'models/app_model.py',
+    },
+
+    {
+        'template_name': 'application.css.pystr',
+        'destination': 'static/css/application.css',
+    },
+
+    {
+        'template_name': 'base.html.pystr',
+        'destination': 'views/base.html',
+    },
 ]
+
+
+GENERATE_CONTROLLER = [
+    {
+        'template_name': '_controller.py.pystr',
+        'destination': 'controllers/{controller_name}_controller.py',
+    },
+
+    {
+        'template_name': '_css.py.pystr',
+        'destination': 'static/css/{controller_name}/{view_name}.css',
+    },
+
+    {
+        'template_name': '_js.py.pystr',
+        'destination': 'static/js/{controller_name}/{view_name}.js',
+    },
+]
+
+
+GENERATE_VIEW = [
+    {
+        'template_name': '_view.html.pystr',
+        'destination': 'views/{controller_name}/{view_name}.html',
+    },
+]
+
+
+GENERATE_CONTROLLER_VIEW = {
+    'template_name': '_controller_view.html.pystr',
+    'destination': 'controllers/{controller_name}_controller.py',
+}

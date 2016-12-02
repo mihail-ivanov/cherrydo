@@ -2,11 +2,16 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/application.css"/>
+
     <title>{project_name}</title>
-    {{% block head %}}{{% endblock %}}
+
+    <link rel="stylesheet" href="/static/css/application.css"/>
+    {{% block css %}}{{% endblock %}}
 </head>
 <body>
     {{% block body %}}{{% endblock %}}
+
+    <script type="text/javascript" src="/static/js/application.js"></script>
+    {{% block js %}}{{% endblock %}}
 </body>
 </html>

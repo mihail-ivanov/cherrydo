@@ -1,7 +1,47 @@
 
 
 from cherrydo.args import get_arg, get_arg_list
-from cherrydo.helpers import is_cherrydo_project, cherrydo_project_name
+from cherrydo.configuration import GENERATE_CONTROLLER
+from cherrydo.configuration import GENERATE_VIEW
+from cherrydo.configuration import GENERATE_CONTROLLER_VIEW
+from cherrydo.helpers import append_template_to_file
+from cherrydo.helpers import cherrydo_project_name
+from cherrydo.helpers import is_cherrydo_project
+from cherrydo.helpers import template_to_file
+
+
+def _format_controller_name(controller_name):
+    return controller_name.replace('_', ' ').title().replace(' ', '')
+
+
+def _generate_view(controller_name, view_name):
+    print('Creating view: {}-{}'.format(controller_name, view_name))
+
+    if not is_cherrydo_project():
+        print('CherryDo project not found!')
+        return False
+
+    context = {
+        'project_name': cherrydo_project_name(),
+        'controller_name': controller_name,
+        'controller_name_formatted': _format_controller_name(controller_name),
+        'view_name': view_name,
+    }
+
+    for file_info in GENERATE_VIEW:
+        template_name = file_info['template_name'].format(context)
+        destination = file_info['destination'].format(context)
+
+        # Create the controller file
+        template_to_file(template_name, destination, context)
+        print('Created: {}'.format(destination))
+
+    # Append the view to the controller
+    template_name = GENERATE_CONTROLLER_VIEW['template_name'].format(context)
+    destination = GENERATE_CONTROLLER_VIEW['destination'].format(context)
+    append_template_to_file(template_name, destination, context)
+
+    return True
 
 
 def _generate_controller(controller_name, params):
@@ -12,8 +52,22 @@ def _generate_controller(controller_name, params):
         print('CherryDo project not found!')
         return False
 
-    project_name = cherrydo_project_name()
-    print('Project name: {}'.format(project_name))
+    context = {
+        'project_name': cherrydo_project_name(),
+        'controller_name': controller_name,
+        'controller_name_formatted': _format_controller_name(controller_name),
+    }
+
+    for file_info in GENERATE_CONTROLLER:
+        template_name = file_info['template_name'].format(context)
+        destination = file_info['destination'].format(context)
+
+        # Create the controller file
+        template_to_file(template_name, destination, context)
+        print('Created: {}'.format(destination))
+
+    for view_name in params:
+        _generate_view(controller_name, view_name)
 
     return True
 
@@ -21,10 +75,6 @@ def _generate_controller(controller_name, params):
 def _generate_model(model_name, params):
     print('Creating model: {}'.format(model_name))
     print(params)
-
-
-def _generate_view(controller_name, view_name):
-    print('Creating view: {}-{}'.format(controller_name, view_name))
 
 
 def check_generate(command):

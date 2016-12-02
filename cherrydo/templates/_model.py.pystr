@@ -1,0 +1,6 @@
+
+from models.app_model import AppModel
+
+
+class {model_name_formatted}(AppModel):
+    pass
