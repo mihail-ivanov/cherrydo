@@ -1,16 +1,12 @@
 
-import os
-
 from cherrydo.args import get_arg
 from cherrydo.configuration import MANDATORY_DIRECTORIES
 from cherrydo.configuration import NEW_CREATE_FILES
 from cherrydo.configuration import OPTIONAL_DIRECTORIES
 from cherrydo.helpers import change_dir
 from cherrydo.helpers import create_dir
-from cherrydo.helpers import get_current_path
 from cherrydo.helpers import is_cherrydo_project
 from cherrydo.helpers import path_exists
-from cherrydo.helpers import read_template
 from cherrydo.helpers import template_to_file
 
 
