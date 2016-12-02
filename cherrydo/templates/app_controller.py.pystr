@@ -1,0 +1,6 @@
+
+from cherrydo import BaseController
+
+
+class AppController(BaseController):
+    pass

@@ -1,0 +1,6 @@
+
+from controllers.app_controller import AppController
+
+
+{controller_name}Controller(AppController):
+    pass
