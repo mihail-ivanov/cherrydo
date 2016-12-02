@@ -11,7 +11,6 @@ from cherrydo.helpers import get_current_path
 from cherrydo.helpers import is_cherrydo_project
 from cherrydo.helpers import path_exists
 from cherrydo.helpers import read_template
-from cherrydo.helpers import template_to_filename
 
 
 def _create_file_from_template(template_name, destination, context):
