@@ -33,11 +33,12 @@ setup(
 
     keywords='cherrypy python development generators',
 
-    packages=find_packages(where='cherrydo'),
+    packages=['cherrydo'],
+    include_package_data=True,
 
     entry_points={
         'console_scripts': [
-            'cherrydo=cherrydo:commands',
+            'cherrydo=cherrydo.commands:run',
         ],
     },
 )
