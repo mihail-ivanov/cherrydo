@@ -33,7 +33,7 @@ setup(
 
     keywords='cherrypy python development generators',
 
-    packages=['cherrydo'],
+    packages=['cherrydo', 'cherrydo/generators'],
     include_package_data=True,
 
     entry_points={
