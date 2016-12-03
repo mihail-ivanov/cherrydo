@@ -7,7 +7,7 @@ from cherrydo.utils import read_template
 from cherrydo.utils import template_to_file
 
 
-class NewController(CherryDoGenerator):
+class GenerateController(CherryDoGenerator):
     def generate_methods(self):
         if self.params:
             method_definitions = []
