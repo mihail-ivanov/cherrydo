@@ -44,26 +44,23 @@ GENERATE_CONTROLLER = [
     },
 
     {
-        'template_name': '_css.py.pystr',
-        'destination': 'static/css/{controller_name}/{view_name}.css',
+        'template_name': '_css.css.pystr',
+        'destination': 'static/css/{controller_name}.css',
     },
 
     {
-        'template_name': '_js.py.pystr',
-        'destination': 'static/js/{controller_name}/{view_name}.js',
+        'template_name': '_js.js.pystr',
+        'destination': 'static/js/{controller_name}.js',
     },
 ]
 
 
-GENERATE_VIEW = [
-    {
-        'template_name': '_view.html.pystr',
-        'destination': 'views/{controller_name}/{view_name}.html',
-    },
-]
+GENERATE_VIEW = {
+    'template_name': '_view.html.pystr',
+    'destination': 'views/{controller_name}/{view_name}.html',
+}
 
 
 GENERATE_CONTROLLER_VIEW = {
-    'template_name': '_controller_view.html.pystr',
-    'destination': 'controllers/{controller_name}_controller.py',
+    'template_name': '_controller_view.py.pystr',
 }

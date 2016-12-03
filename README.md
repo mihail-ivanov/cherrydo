@@ -24,12 +24,6 @@ Generate model
 cherrydo generate model <model_name> (<fields>)
 ```
 
-Generate view
-
-```
-cherrydo generate view <controller_name> <view_name>
-```
-
 DB migrate
 
 ```

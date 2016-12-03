@@ -14,7 +14,6 @@ Usage:
 
     {0} generate controller <controller_name> (<params>) - creates new controller with provided views
     {0} generate model <model_name> (<params>) - creates new model with provided fields
-    {0} generate view <controller_name> <view_name> - adds new view to a controller
 
     {0} db migrate - creates and executes migrations
     {0} db rollback - rollback the last executed migration

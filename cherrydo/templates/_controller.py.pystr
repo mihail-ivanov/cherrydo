@@ -3,4 +3,4 @@ from controllers.app_controller import AppController
 
 
 {controller_name_formatted}Controller(AppController):
-    pass
+{methods}
