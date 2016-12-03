@@ -55,7 +55,7 @@ def read_template(template_name):
     return data
 
 
-def template_to_file(template_name, destination, context):
+def template_to_file(template_name, destination, context, skip_format=False):
     template = read_template(template_name)
     destination_path = get_current_path(destination)
     # Ensure directory
@@ -63,7 +63,10 @@ def template_to_file(template_name, destination, context):
 
     print('Creating template: {}'.format(destination_path))
     with open(destination_path, 'w') as dfile:
-        dfile.write(template.format(**context))
+        if skip_format:
+            dfile.write(template)
+        else:
+            dfile.write(template.format(**context))
 
 
 def append_template_to_file(template_name, destination, context):

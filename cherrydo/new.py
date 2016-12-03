@@ -3,6 +3,7 @@ from cherrydo.args import get_arg
 from cherrydo.configuration import MANDATORY_DIRECTORIES
 from cherrydo.configuration import NEW_CREATE_FILES
 from cherrydo.configuration import OPTIONAL_DIRECTORIES
+from cherrydo.configuration import REQUIREMENTS
 from cherrydo.helpers import change_dir
 from cherrydo.helpers import create_dir
 from cherrydo.helpers import is_cherrydo_project
@@ -24,15 +25,21 @@ def _new_project(project_name):
     create_dir(project_name)
     change_dir(project_name)
 
+    # Create requirements file
+    template_to_file('requirements.txt', 'requirements.txt', {'libraries': "\n".join(REQUIREMENTS)})
+
+    # Create directories
     for dir_name in MANDATORY_DIRECTORIES + OPTIONAL_DIRECTORIES:
         create_dir(dir_name)
 
+    # Create initial files
     context = {'project_name': project_name}
     for file_info in NEW_CREATE_FILES:
         template_to_file(
             file_info['template_name'],
             file_info['destination'],
-            context
+            context,
+            skip_format=file_info.get('skip_format', False)
         )
 
     return True
