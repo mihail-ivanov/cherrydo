@@ -29,16 +29,16 @@ def _generate_view(controller_name, view_name):
     }
 
     for file_info in GENERATE_VIEW:
-        template_name = file_info['template_name'].format(context)
-        destination = file_info['destination'].format(context)
+        template_name = file_info['template_name'].format(**context)
+        destination = file_info['destination'].format(**context)
 
         # Create the controller file
         template_to_file(template_name, destination, context)
         print('Created: {}'.format(destination))
 
     # Append the view to the controller
-    template_name = GENERATE_CONTROLLER_VIEW['template_name'].format(context)
-    destination = GENERATE_CONTROLLER_VIEW['destination'].format(context)
+    template_name = GENERATE_CONTROLLER_VIEW['template_name'].format(**context)
+    destination = GENERATE_CONTROLLER_VIEW['destination'].format(**context)
     append_template_to_file(template_name, destination, context)
 
     return True
