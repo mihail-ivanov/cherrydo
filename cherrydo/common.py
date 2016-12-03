@@ -1,5 +1,5 @@
 
-from cherrydo.helpers import is_cherrydo_project
+from cherrydo.utils import is_cherrydo_project
 
 
 class CherryDoException(Exception):
