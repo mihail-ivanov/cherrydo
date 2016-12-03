@@ -1,4 +1,5 @@
 include cherrydo/templates/_controller.py.pystr
+include cherrydo/templates/_controller_view.py.pystr
 include cherrydo/templates/_css.css.pystr
 include cherrydo/templates/_js.js.pystr
 include cherrydo/templates/_model.py.pystr
@@ -8,3 +9,7 @@ include cherrydo/templates/app_model.py.pystr
 include cherrydo/templates/application.css.pystr
 include cherrydo/templates/application.js.pystr
 include cherrydo/templates/base.html.pystr
+include cherrydo/templates/gitignore
+include cherrydo/templates/requirements.txt
+include cherrydo/templates/run.py
+include cherrydo/templates/site_config.py
