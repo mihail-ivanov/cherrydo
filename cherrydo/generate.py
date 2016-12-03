@@ -9,55 +9,75 @@ from cherrydo.helpers import cherrydo_project_name
 from cherrydo.helpers import is_cherrydo_project
 from cherrydo.helpers import template_to_file
 from cherrydo.helpers import read_template
+from cherrydo.helpers import CherryDoException
 
 
-def _format_controller_name(controller_name):
-    return controller_name.replace('_', ' ').title().replace(' ', '')
+class NewGenerator(object):
+    def __init__(self, name, params):
+        self.name = name
+        self.params = params
+
+    def formatted_name(self):
+        return self.name.replace('_', ' ').title().replace(' ', '')
+
+    def validate(self):
+        if not is_cherrydo_project():
+            raise CherryDoException('CherryDo project not found!')
+
+    def default_context(self):
+        return {}
+
+    def create(self):
+        return True
 
 
-def _generate_controller_methods(controller_name, views):
-    if views:
-        method_definitions = []
+class NewController(NewGenerator):
+    def generate_methods(self):
+        if self.params:
+            method_definitions = []
 
-        for view in views:
-            template_name = GENERATE_CONTROLLER_VIEW['template_name']
+            for view in self.params:
+                template_name = GENERATE_CONTROLLER_VIEW['template_name']
+
+                # Create the controller file
+                method_definitions.append(read_template(template_name).format(**{'view_name': view}))
+
+            return ''.join(method_definitions)
+        else:
+            return 'pass'
+
+    def default_context(self):
+        return {
+            'project_name': cherrydo_project_name(),
+            'controller_name': self.name,
+            'controller_name_formatted': self.formatted_name(),
+            'methods': self.generate_methods(),
+        }
+
+    def create(self):
+        print('Creating controller: {} - {}'.format(self.name, self.params))
+
+        self.validate()
+        context = self.default_context()
+
+        for file_info in GENERATE_CONTROLLER:
+            template_name = file_info['template_name'].format(**context)
+            destination = file_info['destination'].format(**context)
 
             # Create the controller file
-            method_definitions.append(read_template(template_name).format(**{'view_name': view}))
+            template_to_file(template_name, destination, context)
 
-        return ''.join(method_definitions)
-    else:
-        return 'pass'
+        return True
 
 
-def _generate_controller(controller_name, params):
-    print('Creating controller: {}'.format(controller_name))
-    print(params)
+class NewModel(NewGenerator):
+    def create(self):
+        print('Creating model: {} - {}'.format(self.model_name, self.params))
 
-    if not is_cherrydo_project():
-        print('CherryDo project not found!')
-        return False
+        self.validate()
+        context = self.default_context()
 
-    context = {
-        'project_name': cherrydo_project_name(),
-        'controller_name': controller_name,
-        'controller_name_formatted': _format_controller_name(controller_name),
-        'methods': _generate_controller_methods(controller_name, params)
-    }
-
-    for file_info in GENERATE_CONTROLLER:
-        template_name = file_info['template_name'].format(**context)
-        destination = file_info['destination'].format(**context)
-
-        # Create the controller file
-        template_to_file(template_name, destination, context)
-
-    return True
-
-
-def _generate_model(model_name, params):
-    print('Creating model: {}'.format(model_name))
-    print(params)
+        return True
 
 
 def check_generate(command):
@@ -68,14 +88,16 @@ def check_generate(command):
             controller_name = get_arg(3)
             if controller_name:
                 params = get_arg_list(4)
-                _generate_controller(controller_name, params)
+                controller = NewController(controller_name, params)
+                controller.create()
                 return True
 
         if subcommand == 'model':
             model_name = get_arg(3)
             if model_name:
                 params = get_arg_list(4)
-                _generate_model(model_name, params)
+                model = NewModel(model_name, params)
+                model.create()
                 return True
 
     return False

@@ -4,6 +4,10 @@ import os
 from cherrydo.configuration import MANDATORY_DIRECTORIES
 
 
+class CherryDoException(Exception):
+    pass
+
+
 def get_current_path(path):
     current_dir = os.getcwd()
     return os.path.join(current_dir, *path.split('/'))
