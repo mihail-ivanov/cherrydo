@@ -85,12 +85,6 @@ GENERATE_CONTROLLER = [
 ]
 
 
-GENERATE_VIEW = {
-    'template_name': '_view.html.pystr',
-    'destination': 'views/{controller_name}/{view_name}.html',
-}
-
-
 GENERATE_CONTROLLER_VIEW = {
     'template_name': '_controller_view.py.pystr',
 }

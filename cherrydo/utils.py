@@ -4,10 +4,6 @@ import os
 from cherrydo.configuration import MANDATORY_DIRECTORIES
 
 
-class CherryDoException(Exception):
-    pass
-
-
 def get_current_path(path):
     current_dir = os.getcwd()
     return os.path.join(current_dir, *path.split('/'))
@@ -71,12 +67,3 @@ def template_to_file(template_name, destination, context, skip_format=False):
             dfile.write(template)
         else:
             dfile.write(template.format(**context))
-
-
-def append_template_to_file(template_name, destination, context):
-    template = read_template(template_name)
-    destination_path = get_current_path(destination)
-
-    print('Editing template: {}'.format(destination_path))
-    with open(destination_path, 'a') as dfile:
-        dfile.write(template.format(**context))

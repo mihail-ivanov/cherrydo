@@ -1,37 +1,15 @@
 
-
-from cherrydo.args import get_arg, get_arg_list
+from cherrydo.args import get_arg
+from cherrydo.args import get_arg_list
+from cherrydo.common import CherryDoGenerator
 from cherrydo.configuration import GENERATE_CONTROLLER
-from cherrydo.configuration import GENERATE_VIEW
 from cherrydo.configuration import GENERATE_CONTROLLER_VIEW
-from cherrydo.helpers import append_template_to_file
-from cherrydo.helpers import cherrydo_project_name
-from cherrydo.helpers import is_cherrydo_project
-from cherrydo.helpers import template_to_file
-from cherrydo.helpers import read_template
-from cherrydo.helpers import CherryDoException
+from cherrydo.utils import cherrydo_project_name
+from cherrydo.utils import read_template
+from cherrydo.utils import template_to_file
 
 
-class NewGenerator(object):
-    def __init__(self, name, params):
-        self.name = name
-        self.params = params
-
-    def formatted_name(self):
-        return self.name.replace('_', ' ').title().replace(' ', '')
-
-    def validate(self):
-        if not is_cherrydo_project():
-            raise CherryDoException('CherryDo project not found!')
-
-    def default_context(self):
-        return {}
-
-    def create(self):
-        return True
-
-
-class NewController(NewGenerator):
+class NewController(CherryDoGenerator):
     def generate_methods(self):
         if self.params:
             method_definitions = []
@@ -70,12 +48,12 @@ class NewController(NewGenerator):
         return True
 
 
-class NewModel(NewGenerator):
+class NewModel(CherryDoGenerator):
     def create(self):
         print('Creating model: {} - {}'.format(self.model_name, self.params))
 
         self.validate()
-        context = self.default_context()
+        # context = self.default_context()
 
         return True
 
